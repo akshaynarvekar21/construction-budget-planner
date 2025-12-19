@@ -75,26 +75,24 @@ export const MarkupDialog = (
                 },
             }}
         >
-            <DialogTitle>
-                <Typography sx={{ fontWeight: 600 }} variant='h5'>
+            <DialogTitle sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                paddingBlock: '24px'
+            }}>
+                <Typography sx={{ fontWeight: 600, paddingBlock: '9px' }} variant='h5'>
                     Add Markup
                 </Typography>
-                <IconButton
-                    onClick={handleClose}
-                    sx={{
-                        position: 'absolute',
-                        right: 8,
-                        top: 8,
-                    }}
-                >
+                <IconButton onClick={handleClose}>
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
             <DialogContent sx={{ overflowX: 'hidden' }}>
                 <Box display='flex'>
-                    <Box sx={{ marginRight: '16px', width: '70%' }}>
+                    <Box sx={{ marginRight: '16px', width: '75%' }}>
                         <InputLabel id='cost-code-select'>Cost code</InputLabel>
                         <Select
+                            size='small'
                             fullWidth
                             labelId='cost-code-select'
                             value={selectedCostCode}
@@ -115,6 +113,7 @@ export const MarkupDialog = (
                             type="number"
                             value={percent}
                             placeholder="0"
+                            size='small'
                             onChange={(e) => setPercent(Number(e.target.value))}
                         />
                     </Box>
@@ -125,7 +124,7 @@ export const MarkupDialog = (
                     percent={Number(percent)}
                 />
             </DialogContent>
-            <DialogActions disableSpacing sx={{ px: 3, pb: 2, gap: 2, justifyContent: 'space-between' }}>
+            <DialogActions disableSpacing sx={{ px: 3, pb: 2, pt: '48px', gap: 2, justifyContent: 'space-between' }}>
                 <Button
                     variant='outlined'
                     size='large'
