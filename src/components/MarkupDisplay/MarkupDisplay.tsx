@@ -12,13 +12,40 @@ const MarkupDisplayRow = ({ markup, onEdit }: { markup: Markup, onEdit: (m: Mark
                 style: 'currency',
                 currency: 'USD',
             })}</TableCell>
-            <TableCell>
-                <Box display='flex'>
-                    <IconButton aria-label='edit-markup' onClick={() => onEdit(markup)}>
-                        <Edit />
+            <TableCell align="right">
+                <Box display='flex' justifyContent='end'>
+                    <IconButton
+                        aria-label='edit-markup'
+                        onClick={() => onEdit(markup)}
+                        sx={{
+                            borderRadius: '4px',
+                            border: '1px solid',
+                            borderColor: 'divider',
+                            backgroundColor: 'transparent',
+                            marginRight: '8px',
+                            '&:hover': {
+                                backgroundColor: 'grey.50',
+                            }
+                        }}
+                        size="small"
+                    >
+                        <Edit fontSize="inherit" />
                     </IconButton>
-                    <IconButton aria-label='delete-markup' onClick={() => deleteMarkUpItem(markup.id || '')}>
-                        <Delete />
+                    <IconButton
+                        aria-label='delete-markup'
+                        onClick={() => deleteMarkUpItem(markup.id || '')}
+                        sx={{
+                            borderRadius: '4px',
+                            border: '1px solid',
+                            borderColor: 'divider',
+                            backgroundColor: 'transparent',
+                            '&:hover': {
+                                backgroundColor: 'grey.50',
+                            }
+                        }}
+                        size="small"
+                    >
+                        <Delete fontSize="inherit" />
                     </IconButton>
                 </Box>
             </TableCell>

@@ -62,9 +62,22 @@ const BudgetTableRow = ({ budgetLine, ind }: { budgetLine: Budget, ind: number }
                     })}
                 />
             </TableCell>
-            <TableCell>
-                <IconButton aria-label="delete" onClick={() => deleteBudgetItem(ind)}>
-                    <DeleteIcon />
+            <TableCell align="right">
+                <IconButton
+                    aria-label="delete"
+                    onClick={() => deleteBudgetItem(ind)}
+                    sx={{
+                        borderRadius: '4px',
+                        border: '1px solid',
+                        borderColor: 'divider',
+                        backgroundColor: 'transparent',
+                        '&:hover': {
+                            backgroundColor: 'grey.50',
+                        }
+                    }}
+                    size="small"
+                >
+                    <DeleteIcon fontSize="inherit" />
                 </IconButton>
             </TableCell>
         </TableRow>

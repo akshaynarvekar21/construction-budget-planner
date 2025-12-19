@@ -32,12 +32,22 @@ const CostCodeTableRow = ({ costCode = '', index }: { costCode?: string; index: 
                     }}
                 />
             </TableCell>
-            <TableCell>
+            <TableCell align="right">
                 <IconButton
                     aria-label="delete"
                     onClick={() => deleteCostCode(index)}
+                    sx={{
+                        borderRadius: '4px',
+                        border: '1px solid',
+                        borderColor: 'divider',
+                        backgroundColor: 'transparent',
+                        '&:hover': {
+                            backgroundColor: 'grey.50',
+                        }
+                    }}
+                    size="small"
                 >
-                    <DeleteIcon />
+                    <DeleteIcon fontSize="inherit" />
                 </IconButton>
             </TableCell>
         </TableRow>
