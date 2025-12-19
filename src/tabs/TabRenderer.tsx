@@ -1,28 +1,21 @@
 import { Container } from "@mui/material";
 import { Budget } from "./budget/Budget";
 import { Cost } from "./cost/Cost";
-import { useTab, TabType } from "../context/TabContext";
 import { CostCodeProvider } from "../context/CostCodeContext";
 import { BudgetProvider } from "../context/BudgetContext";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 export const TabRenderer = () => {
-    const { tab } = useTab();
-
-    const getTabContent = (tab: TabType) => {
-        switch (tab) {
-            case TabType.COST:
-                return <Cost />;
-            case TabType.BUDGET:
-            default:
-                return <Budget />;
-        }
-    };
 
     return (
         <CostCodeProvider>
             <BudgetProvider>
                 <Container sx={{ paddingTop: '48px' }}>
-                    {getTabContent(tab)}
+                    <Routes>
+                        <Route path='/budget' element={<Budget />} />
+                        <Route path='/cost' element={<Cost />} />
+                        <Route path="/" element={<Navigate to="/budget" replace />} />
+                    </Routes>
                 </Container>
             </BudgetProvider>
         </CostCodeProvider>

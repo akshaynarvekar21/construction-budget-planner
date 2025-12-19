@@ -97,14 +97,16 @@ export const MarkupTable = ({ selectedIds, setSelectedIds, percent }: {
                 </TableHead>
                 <TableBody>
                     {
-                        budgetList.map((budget) => (
-                            <MarkupTableRow
-                                key={budget.id}
-                                budget={budget}
-                                checked={selectedIds.includes(budget.id)}
-                                onToggle={() => handleToggleRow(budget.id)}
-                            />
-                        ))
+                        budgetList
+                            .filter(budget => budget.amount && budget.costCode.length)
+                            .map((budget) => (
+                                <MarkupTableRow
+                                    key={budget.id}
+                                    budget={budget}
+                                    checked={selectedIds.includes(budget.id)}
+                                    onToggle={() => handleToggleRow(budget.id)}
+                                />
+                            ))
                     }
                 </TableBody>
                 <TableFooter>
