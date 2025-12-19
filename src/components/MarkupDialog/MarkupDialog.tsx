@@ -30,7 +30,7 @@ export const MarkupDialog = (
     const { costCodes } = useCostCode();
     const { addMarkup, updateMarkUpItem } = useBudget();
     const [selectedCostCode, setSelectedCostCode] = useState('');
-    const [percent, setPercent] = useState<number>(0);
+    const [percent, setPercent] = useState<number | string>('');
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
     const handleSave = () => {
@@ -38,13 +38,13 @@ export const MarkupDialog = (
             updateMarkUpItem({
                 id: markup.id,
                 costCode: selectedCostCode,
-                percent,
+                percent: Number(percent),
                 appliedIds: selectedIds,
             })
         } else {
             addMarkup({
                 costCode: selectedCostCode,
-                percent,
+                percent: Number(percent),
                 appliedIds: selectedIds,
             })
         }
@@ -54,7 +54,7 @@ export const MarkupDialog = (
     useEffect(() => {
         if (open) {
             setSelectedCostCode(markup?.costCode || '');
-            setPercent(markup?.percent || 0);
+            setPercent(markup?.percent || '');
             setSelectedIds(markup?.appliedIds || []);
         }
     }, [markup, open]);
@@ -111,6 +111,7 @@ export const MarkupDialog = (
                         <TextField
                             type="number"
                             value={percent}
+                            placeholder="0"
                             onChange={(e) => setPercent(Number(e.target.value))}
                         />
                     </Box>
@@ -118,7 +119,7 @@ export const MarkupDialog = (
                 <MarkupTable
                     selectedIds={selectedIds}
                     setSelectedIds={setSelectedIds}
-                    percent={percent}
+                    percent={Number(percent)}
                 />
             </DialogContent>
             <DialogActions disableSpacing sx={{ px: 3, pb: 2, gap: 2, justifyContent: 'space-between' }}>
