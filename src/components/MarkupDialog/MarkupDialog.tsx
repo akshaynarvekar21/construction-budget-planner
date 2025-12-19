@@ -89,7 +89,7 @@ export const MarkupDialog = (
             </DialogTitle>
             <DialogContent sx={{ overflowX: 'hidden' }}>
                 <Box display='flex'>
-                    <Box sx={{ marginRight: '16px', width: '75%' }}>
+                    <Box sx={{ marginRight: '16px', width: '80%' }}>
                         <InputLabel id='cost-code-select'>Cost code</InputLabel>
                         <Select
                             size='small'

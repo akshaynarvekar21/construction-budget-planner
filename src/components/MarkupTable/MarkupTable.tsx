@@ -72,6 +72,10 @@ export const MarkupTable = ({ selectedIds, setSelectedIds, percent }: {
     return (
         <TableContainer>
             <Table>
+                <colgroup>
+                    <col style={{ width: '70%' }} />
+                    <col style={{ width: '30%' }} />
+                </colgroup>
                 <TableHead>
                     <TableRow>
                         <TableCell>
