@@ -5,7 +5,7 @@ import { useBudget } from "../../context/BudgetContext";
 export const GrandTotalDisplay = () => {
     const { grandTotal } = useBudget();
     return (
-        <TableContainer>
+        <TableContainer sx={{ width: '70%' }}>
             <Table>
                 <colgroup>
                     <col style={{ width: '55%' }} />

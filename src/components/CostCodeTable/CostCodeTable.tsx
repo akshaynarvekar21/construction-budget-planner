@@ -52,11 +52,11 @@ export const CostCodeTable = () => {
     }, [costCodes, addCostCode]);
 
     return (
-        <TableContainer>
+        <TableContainer sx={{ width: '70%' }}>
             <Table>
                 <colgroup>
-                    <col style={{ width: '90%' }} />
-                    <col style={{ width: '10%' }} />
+                    <col style={{ width: '85%' }} />
+                    <col style={{ width: '15%' }} />
                 </colgroup>
                 <TableHead>
                     <TableRow>

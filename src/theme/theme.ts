@@ -17,12 +17,6 @@ export const customTheme = createTheme({
             'Roboto',
             'sans-serif',
         ].join(','),
-
-        body2: {
-            fontSize: 14,
-            fontWeight: 600,
-            lineHeight: 1.7,
-        },
     },
     components: {
         MuiAppBar: {
@@ -43,13 +37,6 @@ export const customTheme = createTheme({
                     textTransform: 'none',
                 },
             },
-        },
-        MuiContainer: {
-            styleOverrides: {
-                root: {
-                    margin: '0'
-                }
-            }
         },
         MuiTableCell: {
             styleOverrides: {
@@ -77,7 +64,7 @@ export const customTheme = createTheme({
                 root: ({ theme }) => ({
                     border: `1px solid ${theme.palette.divider}`,
                     borderRadius: 4,
-                    marginTop: '16px',
+                    marginTop: '24px',
                 }),
             },
         },

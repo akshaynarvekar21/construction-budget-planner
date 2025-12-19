@@ -1,16 +1,19 @@
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Container, Divider, Toolbar, Typography } from '@mui/material';
 import { AppTabs } from '../Tabs/Tabs';
 
 export const Header = () => {
 
   return (
     <AppBar position='static'>
-      <Toolbar sx={{ padding: '16px' }}>
-        <Typography variant="h4">
-          1234 Main Street
-        </Typography>
-      </Toolbar>
-      <AppTabs />
+      <Container>
+        <Toolbar disableGutters>
+          <Typography sx={{ fontWeight: 600 }} variant="h4">
+            1234 Main Street
+          </Typography>
+        </Toolbar>
+        <AppTabs />
+      </Container>
+      <Divider />
     </AppBar>
   );
 }

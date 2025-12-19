@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs } from '@mui/material';
+import { Tab, Tabs } from '@mui/material';
 import { useTab, TabType } from '../../context/TabContext';
 
 export const AppTabs = () => {
@@ -9,17 +9,14 @@ export const AppTabs = () => {
     };
 
     return (
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs
-                value={tab}
-                onChange={handleChange}
-                textColor="secondary"
-                indicatorColor="secondary"
-                sx={{ paddingLeft: '16px' }}
-            >
-                <Tab value={TabType.BUDGET} label="Budget" />
-                <Tab value={TabType.COST} label="Cost Codes" />
-            </Tabs>
-        </Box>
+        <Tabs
+            value={tab}
+            onChange={handleChange}
+            textColor="secondary"
+            indicatorColor="secondary"
+        >
+            <Tab value={TabType.BUDGET} label="Budget" />
+            <Tab value={TabType.COST} label="Cost Codes" />
+        </Tabs>
     );
 }

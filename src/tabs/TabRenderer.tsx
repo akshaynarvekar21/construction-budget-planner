@@ -21,7 +21,7 @@ export const TabRenderer = () => {
     return (
         <CostCodeProvider>
             <BudgetProvider>
-                <Container sx={{ paddingTop: '16px' }}>
+                <Container sx={{ paddingTop: '48px' }}>
                     {getTabContent(tab)}
                 </Container>
             </BudgetProvider>

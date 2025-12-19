@@ -30,7 +30,7 @@ export const MarkupDisplay = ({ onEditMarkup }: { onEditMarkup: (m: Markup) => v
     const { markups, totalMarkupAmount } = useBudget();
 
     return (
-        <TableContainer>
+        <TableContainer sx={{ width: '70%' }}>
             <Table>
                 <colgroup>
                     <col style={{ width: '55%' }} />

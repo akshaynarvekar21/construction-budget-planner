@@ -82,7 +82,7 @@ export const BudgetTable = () => {
     }, [budgetList, addBudgetItem])
 
     return (
-        <TableContainer>
+        <TableContainer sx={{ width: '70%' }}>
             <Table>
                 <colgroup>
                     <col style={{ width: '55%' }} />
