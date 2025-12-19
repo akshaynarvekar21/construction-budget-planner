@@ -20,16 +20,11 @@ export const CostCodeProvider = ({ children }: { children: ReactNode }) => {
 
     const addCostCode = () => setCostCode([...costCodes, '']);
 
-    const updateCostCode = (ind: number, value: string) => setCostCode([
-        ...costCodes.slice(0, ind),
-        value,
-        ...costCodes.slice(ind + 1)
-    ]);
+    const updateCostCode = (ind: number, value: string) =>
+        setCostCode(prev => prev.map((item, i) => i === ind ? value : item));
 
-    const deleteCostCode = (ind: number) => setCostCode([
-        ...costCodes.slice(0, ind),
-        ...costCodes.slice(ind + 1)
-    ]);
+    const deleteCostCode = (ind: number) =>
+        setCostCode(prev => prev.filter((_, i) => i !== ind));
 
     return (
         <CostCodeContext.Provider value={{

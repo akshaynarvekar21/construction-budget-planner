@@ -28,8 +28,8 @@ type BudgetContextType = {
     totalMarkupAmount: number;
     grandTotal: number;
     addBudgetItem: () => void;
-    updateBudgetItem: (ind: number, value: Budget) => void;
-    deleteBudgetItem: (ind: number) => void;
+    updateBudgetItem: (value: Budget) => void;
+    deleteBudgetItem: (id: string) => void;
     addMarkup: (markup: Markup) => void;
     deleteMarkUpItem: (id: string) => void;
     updateMarkUpItem: (markup: Markup) => void;
@@ -55,14 +55,14 @@ export const BudgetProvider = ({ children }: { children: ReactNode }) => {
 
     const addBudgetItem = () => setBudgetList([...budgetList, { costCode: '', id: uuidv4() }]);
 
-    const updateBudgetItem = (index: number, budget: Budget) => {
-        setBudgetList(prev => prev.map((item, i) =>
-            i === index ? budget : item
+    const updateBudgetItem = (budget: Budget) => {
+        setBudgetList(prev => prev.map((item) =>
+            item.id === budget.id ? budget : item
         ));
     };
 
-    const deleteBudgetItem = (ind: number) => {
-        setBudgetList(prev => prev.filter((_, i) => i !== ind));
+    const deleteBudgetItem = (id: string) => {
+        setBudgetList(prev => prev.filter((item) => item.id !== id));
     };
 
     const addMarkup = (markup: Markup) => {

@@ -99,11 +99,13 @@ export const MarkupDialog = (
                             onChange={(e) => setSelectedCostCode(e.target.value)}
                         >
                             {
-                                costCodes.map(costCode =>
-                                    <MenuItem key={costCode} value={costCode}>
-                                        {costCode}
-                                    </MenuItem>
-                                )
+                                costCodes
+                                    .filter(costCode => costCode.length)
+                                    .map(costCode =>
+                                        <MenuItem key={costCode} value={costCode}>
+                                            {costCode}
+                                        </MenuItem>
+                                    )
                             }
                         </Select>
                     </Box>
