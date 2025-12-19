@@ -4,7 +4,7 @@ import { useTab, TabType } from '../../context/TabContext';
 export const AppTabs = () => {
     const { tab, setTab } = useTab();
 
-    const handleChange = (event: React.SyntheticEvent, tab: TabType) => {
+    const handleChange = (_: React.SyntheticEvent, tab: TabType) => {
         setTab(tab);
     };
 
