@@ -10,6 +10,7 @@ import {
     MenuItem,
     Select,
     TextField,
+    Typography,
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useCostCode } from "../../context/CostCodeContext";
@@ -75,7 +76,9 @@ export const MarkupDialog = (
             }}
         >
             <DialogTitle>
-                Add Markup
+                <Typography sx={{ fontWeight: 600 }} variant='h5'>
+                    Add Markup
+                </Typography>
                 <IconButton
                     onClick={handleClose}
                     sx={{
@@ -87,9 +90,9 @@ export const MarkupDialog = (
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
-            <DialogContent>
+            <DialogContent sx={{ overflowX: 'hidden' }}>
                 <Box display='flex'>
-                    <Box sx={{ marginRight: '16px', width: '65%' }}>
+                    <Box sx={{ marginRight: '16px', width: '70%' }}>
                         <InputLabel id='cost-code-select'>Cost code</InputLabel>
                         <Select
                             fullWidth
@@ -125,19 +128,19 @@ export const MarkupDialog = (
             <DialogActions disableSpacing sx={{ px: 3, pb: 2, gap: 2, justifyContent: 'space-between' }}>
                 <Button
                     variant='outlined'
-                    color='secondary'
                     size='large'
                     fullWidth
                     onClick={handleClose}
+                    disableElevation
                 >
                     Cancel
                 </Button>
                 <Button
                     variant='contained'
-                    color='secondary'
                     size='large'
                     fullWidth
                     onClick={handleSave}
+                    disableElevation
                 >
                     Save
                 </Button>

@@ -12,8 +12,6 @@ export const AppTabs = () => {
         <Tabs
             value={tab}
             onChange={handleChange}
-            textColor="secondary"
-            indicatorColor="secondary"
         >
             <Tab value={TabType.BUDGET} label="Budget" />
             <Tab value={TabType.COST} label="Cost Codes" />

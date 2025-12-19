@@ -11,8 +11,8 @@ export const Cost = () => {
                 <Button
                     variant="contained"
                     startIcon={<Add />}
-                    color="secondary"
                     onClick={() => addCostCode()}
+                    disableElevation
                 >
                     Add cost code
                 </Button>

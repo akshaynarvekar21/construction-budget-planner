@@ -29,17 +29,17 @@ export const Budget = () => {
                 <Button
                     variant="contained"
                     startIcon={<Add />}
-                    color="secondary"
                     sx={{ marginRight: '16px' }}
                     onClick={() => addBudgetItem()}
+                    disableElevation
                 >
                     Add budget line
                 </Button>
                 <Button
                     variant="contained"
                     startIcon={<Add />}
-                    color="secondary"
                     onClick={() => setIsDialogOpen(true)}
+                    disableElevation
                 >
                     Add markup
                 </Button>

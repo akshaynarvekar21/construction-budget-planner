@@ -3,11 +3,14 @@ import { createTheme } from '@mui/material/styles';
 export const customTheme = createTheme({
     palette: {
         primary: {
-            main: '#FFFFFFF',
-        },
-        secondary: {
             main: '#00CC77',
             contrastText: '#FFFFFF',
+        },
+        background: {
+            default: '#FFFFFF',
+        },
+        grey: {
+            50: '#F9FAFB',
         },
         divider: '#D3D9DE'
     },
@@ -22,13 +25,34 @@ export const customTheme = createTheme({
         MuiAppBar: {
             defaultProps: {
                 elevation: 0,
+                color: 'inherit',
             },
         },
         MuiButton: {
             styleOverrides: {
                 root: {
                     textTransform: 'none',
+                    borderRadius: '4px',
                 },
+                containedPrimary: ({ theme }) => ({
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    border: '1px solid transparent',
+                    '&:hover': {
+                        backgroundColor: theme.palette.background.default,
+                        color: theme.palette.primary.main,
+                        border: `1px solid ${theme.palette.primary.main}`,
+                    },
+                }),
+                outlinedPrimary: ({ theme }) => ({
+                    borderColor: theme.palette.primary.main,
+                    color: theme.palette.primary.main,
+                    '&:hover': {
+                        backgroundColor: theme.palette.primary.main,
+                        color: theme.palette.primary.contrastText,
+                        borderColor: theme.palette.primary.main,
+                    },
+                }),
             },
         },
         MuiTab: {
@@ -49,14 +73,15 @@ export const customTheme = createTheme({
                     paddingTop: '9px',
                     paddingBottom: '9px',
                 }),
-                head: {
-                    backgroundColor: '#F9FAFB',
+                head: ({ theme }) => ({
+                    backgroundColor: theme.palette.grey[50],
                     fontWeight: 600,
-                },
-                footer: {
-                    backgroundColor: '#F9FAFB',
+                }),
+                footer: ({ theme }) => ({
+                    backgroundColor: theme.palette.grey[50],
                     fontWeight: 600,
-                }
+                    borderBottom: 'none',
+                })
             },
         },
         MuiTableContainer: {
@@ -65,15 +90,6 @@ export const customTheme = createTheme({
                     border: `1px solid ${theme.palette.divider}`,
                     borderRadius: 4,
                     marginTop: '24px',
-                }),
-            },
-        },
-        MuiOutlinedInput: {
-            styleOverrides: {
-                root: ({ theme }) => ({
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: theme.palette.secondary.main,
-                    },
                 }),
             },
         },

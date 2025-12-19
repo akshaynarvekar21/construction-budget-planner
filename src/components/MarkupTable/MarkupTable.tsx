@@ -23,7 +23,6 @@ const MarkupTableRow = ({ budget, checked, onToggle }: {
                     label={budget.costCode}
                     control={
                         <Checkbox
-                            color="secondary"
                             checked={checked}
                             onChange={onToggle}
                         />}
@@ -83,7 +82,6 @@ export const MarkupTable = ({ selectedIds, setSelectedIds, percent }: {
                                         checked={isAllSelected}
                                         indeterminate={isSomeSelected}
                                         onChange={handleToggleAll}
-                                        color="secondary"
                                     />}
                             />
                         </TableCell>
