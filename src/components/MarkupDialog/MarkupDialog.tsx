@@ -14,7 +14,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { useCostCode } from "../../context/CostCodeContext";
 import { MarkupTable } from "../MarkupTable/MarkupTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useBudget, type Markup } from "../../context/BudgetContext";
 
 export const MarkupDialog = (
@@ -25,22 +25,39 @@ export const MarkupDialog = (
     }: {
         open: boolean;
         handleClose: () => void;
-        markup?: Markup;
+        markup: Markup | null;
     }) => {
     const { costCodes } = useCostCode();
-    const { addMarkup } = useBudget();
-    const [selectedCostCode, setSelectedCostCode] = useState(markup?.costCode || '');
-    const [percent, setPercent] = useState<number>(markup?.percent || 0);
-    const [selectedIds, setSelectedIds] = useState<string[]>(markup?.appliedIds || []);
+    const { addMarkup, updateMarkUpItem } = useBudget();
+    const [selectedCostCode, setSelectedCostCode] = useState('');
+    const [percent, setPercent] = useState<number>(0);
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
     const handleSave = () => {
-        addMarkup({
-            costCode: selectedCostCode,
-            percent,
-            appliedIds: selectedIds,
-        })
+        if (markup?.id) {
+            updateMarkUpItem({
+                id: markup.id,
+                costCode: selectedCostCode,
+                percent,
+                appliedIds: selectedIds,
+            })
+        } else {
+            addMarkup({
+                costCode: selectedCostCode,
+                percent,
+                appliedIds: selectedIds,
+            })
+        }
         handleClose();
     };
+
+    useEffect(() => {
+        if (open) {
+            setSelectedCostCode(markup?.costCode || '');
+            setPercent(markup?.percent || 0);
+            setSelectedIds(markup?.appliedIds || []);
+        }
+    }, [markup, open]);
 
     return (
         <Dialog

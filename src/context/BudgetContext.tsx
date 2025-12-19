@@ -31,6 +31,8 @@ type BudgetContextType = {
     updateBudgetItem: (ind: number, value: Budget) => void;
     deleteBudgetItem: (ind: number) => void;
     addMarkup: (markup: Markup) => void;
+    deleteMarkUpItem: (id: string) => void;
+    updateMarkUpItem: (markup: Markup) => void;
 }
 
 const BudgetContext = createContext<BudgetContextType>({
@@ -43,6 +45,8 @@ const BudgetContext = createContext<BudgetContextType>({
     deleteBudgetItem: () => null,
     updateBudgetItem: () => null,
     addMarkup: () => null,
+    deleteMarkUpItem: () => null,
+    updateMarkUpItem: () => null,
 });
 
 export const BudgetProvider = ({ children }: { children: ReactNode }) => {
@@ -65,6 +69,14 @@ export const BudgetProvider = ({ children }: { children: ReactNode }) => {
         setMarkups(prev => [...prev, { ...markup, id: uuidv4() }]);
     };
 
+    const deleteMarkUpItem = (id: string) => {
+        setMarkups(prev => prev.filter(m => m.id !== id));
+    }
+
+    const updateMarkUpItem = (markup: Markup) => {
+        setMarkups(prev => prev.map((m) => m.id === markup.id ? markup : m));
+    }
+
     const derivedData = useMemo(() => {
         const baseTotal = budgetList.reduce((sum, curr) => sum + (curr.amount || 0), 0);
         const calculatedMarkups: Markup[] = markups.map(m => {
@@ -73,7 +85,7 @@ export const BudgetProvider = ({ children }: { children: ReactNode }) => {
                 .reduce((sum, curr) => sum + (curr.amount || 0), 0);
             return {
                 ...m,
-                calculatedAmount: subtotal * (m.percent / 100)
+                amount: subtotal * (m.percent / 100)
             };
         });
         const totalMarkupAmount = calculatedMarkups.reduce((sum, m) => sum + (m.amount || 0), 0);
@@ -93,6 +105,8 @@ export const BudgetProvider = ({ children }: { children: ReactNode }) => {
             deleteBudgetItem,
             updateBudgetItem,
             addMarkup,
+            deleteMarkUpItem,
+            updateMarkUpItem,
             ...derivedData
         }}>
             {children}

@@ -85,9 +85,9 @@ export const BudgetTable = () => {
         <TableContainer>
             <Table>
                 <colgroup>
-                    <col style={{ width: '60%' }} />
+                    <col style={{ width: '55%' }} />
                     <col style={{ width: '30%' }} />
-                    <col style={{ width: '10%' }} />
+                    <col style={{ width: '15%' }} />
                 </colgroup>
                 <TableHead>
                     <TableRow>
