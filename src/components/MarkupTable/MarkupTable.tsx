@@ -77,6 +77,9 @@ export const MarkupTable = ({ selectedIds, setSelectedIds, percent }: {
                         <TableCell>
                             <FormControlLabel
                                 label='Cost codes'
+                                slotProps={{
+                                    typography: { sx: { fontWeight: 600 } }
+                                }}
                                 control={
                                     <Checkbox
                                         checked={isAllSelected}

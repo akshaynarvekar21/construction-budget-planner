@@ -33,7 +33,10 @@ const CostCodeTableRow = ({ costCode = '', index }: { costCode?: string; index: 
                 />
             </TableCell>
             <TableCell>
-                <IconButton aria-label="delete" onClick={() => deleteCostCode(index)}>
+                <IconButton
+                    aria-label="delete"
+                    onClick={() => deleteCostCode(index)}
+                >
                     <DeleteIcon />
                 </IconButton>
             </TableCell>
