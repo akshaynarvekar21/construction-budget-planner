@@ -1,4 +1,14 @@
-import { Box, IconButton, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
+import {
+    Box,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableFooter,
+    TableHead,
+    TableRow
+} from "@mui/material";
 import { useBudget, type Markup } from "../../context/BudgetContext/BudgetContext";
 import { Delete, Edit } from "@mui/icons-material";
 
