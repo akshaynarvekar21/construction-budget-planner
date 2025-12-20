@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# Construction Budget Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application helps you manage your construction project.
 
-Currently, two official plugins are available:
+Live demo: https://akshaynarvekar21.github.io/construction-budget-planner
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+There are two main section
+  1. Budget
+  2. Cost Codes
 
-## React Compiler
+Steps to use:
+  1. Navigate to the Cost codes tab.
+  2. Add the cost codes for your project
+  3. Navigate back to the Budget tab
+  4. Add the different budgets by first selecting the cost code and then entering the budget.
+  5. After add budget, click on the Add markup button to add markups for the costs.
+  6. In the Markup dialog, first select the cost code from the dropdown and then enter the markup percentage.
+  7. The select the budget items to add the markup to.
+  8. Click Save after you are done adding the markup data.
+  9. You will view the markups and grand total below the budgets
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Running the app locally
 
-## Expanding the ESLint configuration
+Ensure you have the latest version of node and npm installed
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run the following commands in your terminal from the root directory of the project
 
 ```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+npm install
+npm run dev
 ```
+
+Run the test cases:
+```js
+npm run test
+```
+
+Cost codes Page:
+
+![Cost Codes Page](<Screenshot 2025-12-20 at 2.30.07 PM.png>)
+
+Budget Page:
+
+![Budget Page](<Screenshot 2025-12-20 at 2.34.29 PM.png>)
+
+Markup Dialog:
+
+![Markup Dialog](<Screenshot 2025-12-20 at 2.32.36 PM.png>)
