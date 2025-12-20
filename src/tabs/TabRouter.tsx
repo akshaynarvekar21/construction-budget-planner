@@ -5,7 +5,7 @@ import { CostCodeProvider } from "../context/CostCodeContext";
 import { BudgetProvider } from "../context/BudgetContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-export const TabRenderer = () => {
+export const TabRouter = () => {
 
     return (
         <CostCodeProvider>

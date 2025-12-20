@@ -1,5 +1,5 @@
 import { Header } from './components/Header/Header';
-import { TabRenderer } from './tabs/TabRenderer';
+import { TabRouter } from './tabs/TabRouter';
 import { BrowserRouter } from 'react-router-dom';
 
 export const App = () => {
@@ -7,7 +7,7 @@ export const App = () => {
     <>
       <BrowserRouter basename="/construction-budget-planner">
         <Header />
-        <TabRenderer />
+        <TabRouter />
       </BrowserRouter>
     </>
   )
