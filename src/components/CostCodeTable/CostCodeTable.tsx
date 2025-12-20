@@ -22,7 +22,9 @@ const CostCodeTableRow = ({ costCode = '', index }: { costCode?: string; index: 
                     variant="outlined"
                     placeholder="Enter cost code"
                     size="small"
-                    fullWidth
+                    sx={{
+                        width: '70%'
+                    }}
                     value={text}
                     onChange={(evt) => {
                         setText(evt.target.value);

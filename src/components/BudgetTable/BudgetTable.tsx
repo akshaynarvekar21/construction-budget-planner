@@ -34,6 +34,9 @@ const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
                             ...budgetLine,
                             costCode: newVal || ''
                         })
+                        if (!newVal) {
+                            setNum('');
+                        }
                     }}
                     renderInput={(params) =>
                         <TextField
@@ -54,6 +57,7 @@ const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
                     fullWidth
                     value={num}
                     type="number"
+                    disabled={val === ''}
                     sx={{ input: { textAlign: 'right' } }}
                     onChange={(evt) => setNum(Number(evt.target.value))}
                     onBlur={(evt) => updateBudgetItem({

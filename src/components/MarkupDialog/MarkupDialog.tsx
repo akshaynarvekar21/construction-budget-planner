@@ -10,7 +10,6 @@ import {
     MenuItem,
     Select,
     TextField,
-    Typography,
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
@@ -78,11 +77,11 @@ export const MarkupDialog = (
             <DialogTitle sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                paddingBlock: '24px'
+                alignItems: 'end',
+                paddingBlock: '24px',
+                fontWeight: 600
             }}>
-                <Typography sx={{ fontWeight: 600, paddingBlock: '9px' }} variant='h5'>
-                    Add Markup
-                </Typography>
+                Add Markup
                 <IconButton onClick={handleClose}>
                     <CloseIcon />
                 </IconButton>

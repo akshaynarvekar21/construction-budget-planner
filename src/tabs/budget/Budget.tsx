@@ -8,7 +8,11 @@ import { MarkupDisplay } from "../../components/MarkupDisplay/MarkupDisplay";
 import { GrandTotalDisplay } from "../../components/GrandTotalDisplay/GrandTotalDisplay";
 
 export const Budget = () => {
-    const { addBudgetItem, markups } = useBudget();
+    const {
+        addBudgetItem,
+        markups,
+        baseTotal
+    } = useBudget();
 
     const [editingMarkup, setEditingMarkup] = useState<Markup | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -40,6 +44,7 @@ export const Budget = () => {
                     startIcon={<Add />}
                     onClick={() => setIsDialogOpen(true)}
                     disableElevation
+                    disabled={baseTotal === 0}
                 >
                     Add markup
                 </Button>
