@@ -13,8 +13,7 @@ import {
     Tooltip
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
-import { useBudget, type Budget } from "../../context/BudgetContext/BudgetContext";
+import { useBudget, type Budget, useCostCode } from "../../context";
 
 const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
     const [num, setNum] = useState(budgetLine?.amount || '');

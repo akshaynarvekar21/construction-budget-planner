@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MarkupTable } from './MarkupTable';
-import { useBudget } from '../../context/BudgetContext/BudgetContext';
+import { useBudget } from '../../context';
 
 vi.mock('../../context/BudgetContext/BudgetContext', () => ({
     useBudget: vi.fn(),

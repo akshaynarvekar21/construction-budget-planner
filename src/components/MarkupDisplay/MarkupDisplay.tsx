@@ -9,8 +9,8 @@ import {
     TableHead,
     TableRow
 } from "@mui/material";
-import { useBudget, type Markup } from "../../context/BudgetContext/BudgetContext";
 import { Delete, Edit } from "@mui/icons-material";
+import { useBudget, type Markup } from "../../context";
 
 
 const MarkupDisplayRow = ({ markup, onEdit }: { markup: Markup, onEdit: (m: Markup) => void }) => {

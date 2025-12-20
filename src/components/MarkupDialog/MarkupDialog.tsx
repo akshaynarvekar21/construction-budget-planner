@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -13,10 +14,8 @@ import {
     Typography,
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
-import { MarkupTable } from "../MarkupTable/MarkupTable";
-import { useEffect, useState } from "react";
-import { useBudget, type Markup } from "../../context/BudgetContext/BudgetContext";
+import { useBudget, useCostCode, type Markup } from "../../context";
+import { MarkupTable } from "../MarkupTable";
 
 export const MarkupDialog = (
     {
@@ -133,6 +132,7 @@ export const MarkupDialog = (
                                     )
                             }
                         </Select>
+                        {isCostCodeInvalid && <Typography variant="caption" color="error">Required</Typography>}
                     </Box>
                     <Box>
                         <InputLabel
