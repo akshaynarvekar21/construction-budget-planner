@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Tooltip } from "@mui/material";
 import Add from '@mui/icons-material/Add';
 import { BudgetTable } from "../../components/BudgetTable/BudgetTable";
 import { useBudget, type Markup } from "../../context/BudgetContext/BudgetContext";
@@ -39,15 +39,21 @@ export const Budget = () => {
                 >
                     Add budget line
                 </Button>
-                <Button
-                    variant="contained"
-                    startIcon={<Add />}
-                    onClick={() => setIsDialogOpen(true)}
-                    disableElevation
-                    disabled={baseTotal === 0}
+                <Tooltip
+                    title={baseTotal === 0 ? "Add a budget item first" : ""}
                 >
-                    Add markup
-                </Button>
+                    <span>
+                        <Button
+                            variant="contained"
+                            startIcon={<Add />}
+                            onClick={() => setIsDialogOpen(true)}
+                            disableElevation
+                            disabled={baseTotal === 0}
+                        >
+                            Add markup
+                        </Button>
+                    </span>
+                </Tooltip>
             </Box>
             <MarkupDialog open={isDialogOpen} handleClose={handleClose} markup={editingMarkup} />
             <BudgetTable />
