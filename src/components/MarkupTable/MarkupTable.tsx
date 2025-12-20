@@ -10,6 +10,7 @@ import {
     TableRow
 } from "@mui/material";
 import { useBudget, type Budget } from "../../context";
+import { useMemo } from "react";
 
 const MarkupTableRow = ({ budget, checked, onToggle }: {
     budget: Budget;
@@ -46,9 +47,11 @@ export const MarkupTable = ({ selectedIds, setSelectedIds, percent }: {
 }) => {
     const { budgetList } = useBudget();
 
-    const selectedSubtotal = budgetList
-        .filter(b => selectedIds.includes(b.id))
-        .reduce((sum, curr) => sum + (curr.amount || 0), 0);
+    const selectedSubtotal = useMemo(() => {
+        return budgetList
+            .filter(b => selectedIds.includes(b.id))
+            .reduce((sum, curr) => sum + (curr.amount || 0), 0);
+    }, [budgetList, selectedIds]);
 
     const markupAmount = selectedSubtotal * (percent / 100);
 

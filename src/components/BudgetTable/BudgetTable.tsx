@@ -27,7 +27,7 @@ const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
                     value={val}
                     fullWidth
                     options={costCodes.filter(costCode => costCode.length)}
-                    noOptionsText="No cost codes available"
+                    noOptionsText="Add cost codes first"
                     onChange={(_, newVal) => {
                         setVal(newVal || '');
                         updateBudgetItem({

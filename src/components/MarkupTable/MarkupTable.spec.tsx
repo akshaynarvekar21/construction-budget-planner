@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MarkupTable } from './MarkupTable';
 import { useBudget } from '../../context';
 
-vi.mock('../../context/BudgetContext/BudgetContext', () => ({
+vi.mock('../../context', () => ({
     useBudget: vi.fn(),
 }));
 

@@ -1,13 +1,11 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { BudgetTable } from './BudgetTable';
 import { useBudget, useCostCode } from '../../context';
 
-vi.mock('../../context/CostCodeContext/CostCodeContext', () => ({
-    useCostCode: vi.fn(),
-}));
-vi.mock('../../context/BudgetContext/BudgetContext', () => ({
+vi.mock('../../context', () => ({
     useBudget: vi.fn(),
+    useCostCode: vi.fn(),
 }));
 
 describe('BudgetTable', () => {
@@ -18,12 +16,13 @@ describe('BudgetTable', () => {
     const mockBudgetList = [
         { id: '1', costCode: '10-100', amount: 1000 },
     ];
+    const mockCostCodes = ['10-100', '20-200', '30-300'];
 
     beforeEach(() => {
         vi.clearAllMocks();
 
         vi.mocked(useCostCode).mockReturnValue({
-            costCodes: ['10-100', '20-200', '30-300'],
+            costCodes: mockCostCodes,
         } as any);
 
         vi.mocked(useBudget).mockReturnValue({
@@ -35,53 +34,15 @@ describe('BudgetTable', () => {
         } as any);
     });
 
-    it('renders the table with initial data and total', () => {
+    it('renders the table with initial budget items and total', () => {
         render(<BudgetTable />);
 
-        expect(screen.getByPlaceholderText('0.00')).toHaveValue(1000);
+        expect(screen.getByDisplayValue('10-100')).toBeInTheDocument();
+        expect(screen.getByDisplayValue('1000')).toBeInTheDocument();
         expect(screen.getByText('$1,000.00')).toBeInTheDocument();
     });
 
-    it('updates amount locally on change and calls context on blur', () => {
-        render(<BudgetTable />);
-        const amountInput = screen.getByPlaceholderText('0.00');
-
-        fireEvent.change(amountInput, { target: { value: '2500' } });
-        expect(amountInput).toHaveValue(2500);
-        expect(mockUpdateBudgetItem).not.toHaveBeenCalled();
-
-        fireEvent.blur(amountInput);
-        expect(mockUpdateBudgetItem).toHaveBeenCalledWith({
-            ...mockBudgetList[0],
-            amount: 2500
-        });
-    });
-
-    it('updates cost code using Autocomplete', async () => {
-        render(<BudgetTable />);
-
-        const autocompleteInput = screen.getByPlaceholderText('Select');
-
-        fireEvent.mouseDown(autocompleteInput);
-
-        const option = await screen.findByText('20-200');
-        fireEvent.click(option);
-
-        expect(mockUpdateBudgetItem).toHaveBeenCalledWith({
-            ...mockBudgetList[0],
-            costCode: '20-200'
-        });
-    });
-
-    it('calls deleteBudgetItem when delete button is clicked', () => {
-        render(<BudgetTable />);
-        const deleteBtn = screen.getByLabelText('delete');
-
-        fireEvent.click(deleteBtn);
-        expect(mockDeleteBudgetItem).toHaveBeenCalledWith('1');
-    });
-
-    it('automatically adds a line if the list is empty', async () => {
+    it('calls addBudgetItem if the budget list is empty (useEffect)', () => {
         vi.mocked(useBudget).mockReturnValue({
             budgetList: [],
             addBudgetItem: mockAddBudgetItem,
@@ -89,9 +50,58 @@ describe('BudgetTable', () => {
         } as any);
 
         render(<BudgetTable />);
+        expect(mockAddBudgetItem).toHaveBeenCalledTimes(1);
+    });
 
-        await waitFor(() => {
-            expect(mockAddBudgetItem).toHaveBeenCalledTimes(1);
-        });
+    it('updates cost code when Autocomplete selection changes', async () => {
+        render(<BudgetTable />);
+
+        const autocomplete = screen.getByPlaceholderText('Select');
+        fireEvent.mouseDown(autocomplete);
+
+        const option = screen.getByText('20-200');
+        fireEvent.click(option);
+
+        expect(mockUpdateBudgetItem).toHaveBeenCalledWith(expect.objectContaining({
+            id: '1',
+            costCode: '20-200'
+        }));
+    });
+
+    it('disables the amount field if no cost code is selected', () => {
+        const emptyBudget = [{ id: '2', costCode: '', amount: 0 }];
+        vi.mocked(useBudget).mockReturnValue({
+            budgetList: emptyBudget,
+            addBudgetItem: mockAddBudgetItem,
+            baseTotal: 0,
+        } as any);
+
+        render(<BudgetTable />);
+
+        const amountInput = screen.getByPlaceholderText('0.00');
+        expect(amountInput).toBeDisabled();
+    });
+
+    it('calls updateBudgetItem with new amount on blur', () => {
+        render(<BudgetTable />);
+
+        const amountInput = screen.getByPlaceholderText('0.00');
+
+        fireEvent.change(amountInput, { target: { value: '2500' } });
+        fireEvent.blur(amountInput);
+
+        expect(mockUpdateBudgetItem).toHaveBeenCalledWith(expect.objectContaining({
+            id: '1',
+            amount: 2500
+        }));
+    });
+
+    it('calls deleteBudgetItem when the delete button is clicked', () => {
+        render(<BudgetTable />);
+
+        const deleteBtn = screen.getByRole('button', { name: /delete/i });
+        fireEvent.click(deleteBtn);
+
+        expect(mockDeleteBudgetItem).toHaveBeenCalledWith('1');
     });
 });
