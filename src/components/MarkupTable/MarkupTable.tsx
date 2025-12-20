@@ -9,7 +9,7 @@ import {
     TableHead,
     TableRow
 } from "@mui/material";
-import { useBudget, type Budget } from "../../context/BudgetContext";
+import { useBudget, type Budget } from "../../context/BudgetContext/BudgetContext";
 
 const MarkupTableRow = ({ budget, checked, onToggle }: {
     budget: Budget;
@@ -72,6 +72,10 @@ export const MarkupTable = ({ selectedIds, setSelectedIds, percent }: {
     return (
         <TableContainer>
             <Table>
+                <colgroup>
+                    <col style={{ width: '70%' }} />
+                    <col style={{ width: '30%' }} />
+                </colgroup>
                 <TableHead>
                     <TableRow>
                         <TableCell>
@@ -93,14 +97,16 @@ export const MarkupTable = ({ selectedIds, setSelectedIds, percent }: {
                 </TableHead>
                 <TableBody>
                     {
-                        budgetList.map((budget) => (
-                            <MarkupTableRow
-                                key={budget.id}
-                                budget={budget}
-                                checked={selectedIds.includes(budget.id)}
-                                onToggle={() => handleToggleRow(budget.id)}
-                            />
-                        ))
+                        budgetList
+                            .filter(budget => budget.amount && budget.costCode.length)
+                            .map((budget) => (
+                                <MarkupTableRow
+                                    key={budget.id}
+                                    budget={budget}
+                                    checked={selectedIds.includes(budget.id)}
+                                    onToggle={() => handleToggleRow(budget.id)}
+                                />
+                            ))
                     }
                 </TableBody>
                 <TableFooter>

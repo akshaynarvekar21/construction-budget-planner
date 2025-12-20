@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import Add from '@mui/icons-material/Add';
 import { BudgetTable } from "../../components/BudgetTable/BudgetTable";
-import { useBudget, type Markup } from "../../context/BudgetContext";
+import { useBudget, type Markup } from "../../context/BudgetContext/BudgetContext";
 import { MarkupDialog } from "../../components/MarkupDialog/MarkupDialog";
 import { useState } from "react";
 import { MarkupDisplay } from "../../components/MarkupDisplay/MarkupDisplay";

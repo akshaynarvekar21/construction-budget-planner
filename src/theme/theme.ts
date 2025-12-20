@@ -6,6 +6,9 @@ export const customTheme = createTheme({
             main: '#00CC77',
             contrastText: '#FFFFFF',
         },
+        text: {
+            primary: '#2E3332',
+        },
         background: {
             default: '#FFFFFF',
         },
@@ -91,6 +94,19 @@ export const customTheme = createTheme({
                     borderRadius: 4,
                     marginTop: '24px',
                 }),
+            },
+        },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    '& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button': {
+                        WebkitAppearance: 'none',
+                        margin: 0,
+                    },
+                    '& input[type=number]': {
+                        MozAppearance: 'textfield',
+                    },
+                },
             },
         },
     },

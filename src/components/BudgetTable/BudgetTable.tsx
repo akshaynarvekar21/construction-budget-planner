@@ -12,10 +12,10 @@ import {
     TableFooter
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useCostCode } from "../../context/CostCodeContext";
-import { useBudget, type Budget } from "../../context/BudgetContext";
+import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
+import { useBudget, type Budget } from "../../context/BudgetContext/BudgetContext";
 
-const BudgetTableRow = ({ budgetLine, ind }: { budgetLine: Budget, ind: number }) => {
+const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
     const [num, setNum] = useState(budgetLine?.amount || '');
     const [val, setVal] = useState(budgetLine.costCode);
     const { costCodes } = useCostCode();
@@ -30,7 +30,7 @@ const BudgetTableRow = ({ budgetLine, ind }: { budgetLine: Budget, ind: number }
                     noOptionsText="No cost codes available"
                     onChange={(_, newVal) => {
                         setVal(newVal || '');
-                        updateBudgetItem(ind, {
+                        updateBudgetItem({
                             ...budgetLine,
                             costCode: newVal || ''
                         })
@@ -56,7 +56,7 @@ const BudgetTableRow = ({ budgetLine, ind }: { budgetLine: Budget, ind: number }
                     type="number"
                     sx={{ input: { textAlign: 'right' } }}
                     onChange={(evt) => setNum(Number(evt.target.value))}
-                    onBlur={(evt) => updateBudgetItem(ind, {
+                    onBlur={(evt) => updateBudgetItem({
                         ...budgetLine,
                         amount: Number(evt.target.value)
                     })}
@@ -65,7 +65,7 @@ const BudgetTableRow = ({ budgetLine, ind }: { budgetLine: Budget, ind: number }
             <TableCell align="right">
                 <IconButton
                     aria-label="delete"
-                    onClick={() => deleteBudgetItem(ind)}
+                    onClick={() => deleteBudgetItem(budgetLine.id)}
                     sx={{
                         borderRadius: '4px',
                         border: '1px solid',
@@ -111,11 +111,10 @@ export const BudgetTable = () => {
                 </TableHead>
                 <TableBody>
                     {
-                        budgetList.map((budgetLine, ind) =>
+                        budgetList.map((budgetLine) =>
                             <BudgetTableRow
                                 budgetLine={budgetLine}
                                 key={budgetLine.id}
-                                ind={ind}
                             />)
                     }
                 </TableBody>

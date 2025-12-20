@@ -1,5 +1,5 @@
-import { Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { useBudget } from "../../context/BudgetContext";
+import { Table, TableCell, TableContainer, TableFooter, TableRow } from "@mui/material";
+import { useBudget } from "../../context/BudgetContext/BudgetContext";
 
 
 export const GrandTotalDisplay = () => {
@@ -12,7 +12,7 @@ export const GrandTotalDisplay = () => {
                     <col style={{ width: '30%' }} />
                     <col style={{ width: '15%' }} />
                 </colgroup>
-                <TableHead>
+                <TableFooter>
                     <TableRow>
                         <TableCell>Grand Total</TableCell>
                         <TableCell sx={{ textAlign: 'right' }}>{grandTotal.toLocaleString('en-US', {
@@ -21,7 +21,7 @@ export const GrandTotalDisplay = () => {
                         })}</TableCell>
                         <TableCell></TableCell>
                     </TableRow>
-                </TableHead>
+                </TableFooter>
             </Table>
         </TableContainer>
     )

@@ -1,15 +1,14 @@
 import { Header } from './components/Header/Header';
-import { TabRenderer } from './tabs/TabRenderer';
-import { TabProvider } from './context/TabContext';
-import './App.css';
+import { TabRouter } from './tabs/TabRouter';
+import { BrowserRouter } from 'react-router-dom';
 
 export const App = () => {
   return (
     <>
-      <TabProvider>
+      <BrowserRouter basename="/construction-budget-planner">
         <Header />
-        <TabRenderer />
-      </TabProvider>
+        <TabRouter />
+      </BrowserRouter>
     </>
   )
 }
