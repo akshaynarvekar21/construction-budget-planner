@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { CostCodeTable } from './CostCodeTable';
 import { useCostCode } from '../../context';
 
-vi.mock('../../context/CostCodeContext/CostCodeContext', () => ({
+vi.mock('../../context', () => ({
     useCostCode: vi.fn(),
 }));
 
