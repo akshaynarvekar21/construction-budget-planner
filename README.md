@@ -46,3 +46,7 @@ Budget Page:
 Markup Dialog:
 
 ![Markup Dialog](<Screenshot 2025-12-20 at 2.32.36 PM.png>)
+
+Markup Dialog Validations:
+
+![Markup Dialog Validations](<Screenshot 2025-12-20 at 2.38.19 PM.png>)
