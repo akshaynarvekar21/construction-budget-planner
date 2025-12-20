@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { CostCodeTable } from './CostCodeTable';
-import { useCostCode } from '../../context/CostCodeContext/CostCodeContext';
+import { useCostCode } from '../../context';
 
 vi.mock('../../context/CostCodeContext/CostCodeContext', () => ({
     useCostCode: vi.fn(),

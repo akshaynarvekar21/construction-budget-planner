@@ -1,6 +1,6 @@
-import { Header } from './components/Header/Header';
-import { TabRouter } from './tabs/TabRouter';
 import { BrowserRouter } from 'react-router-dom';
+import { Header } from './components';
+import { TabRouter } from './tabs';
 
 export const App = () => {
   return (

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -13,10 +14,8 @@ import {
     Typography,
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
-import { MarkupTable } from "../MarkupTable/MarkupTable";
-import { useEffect, useState } from "react";
-import { useBudget, type Markup } from "../../context/BudgetContext/BudgetContext";
+import { useBudget, useCostCode, type Markup } from "../../context";
+import { MarkupTable } from "../MarkupTable";
 
 export const MarkupDialog = (
     {
@@ -30,11 +29,25 @@ export const MarkupDialog = (
     }) => {
     const { costCodes } = useCostCode();
     const { addMarkup, updateMarkUpItem } = useBudget();
+
     const [selectedCostCode, setSelectedCostCode] = useState('');
     const [percent, setPercent] = useState<number | string>('');
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-    const handleSave = () => {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const isCostCodeInvalid = isSubmitted && !selectedCostCode;
+    const isPercentInvalid = isSubmitted && (percent === '' || Number(percent) <= 0);
+    const isTableInvalid = isSubmitted && selectedIds.length === 0;
+
+    const handleSave = (evt: React.FormEvent) => {
+        evt.preventDefault();
+        setIsSubmitted(true);
+
+        if (!selectedCostCode || Number(percent) <= 0 || selectedIds.length === 0) {
+            return;
+        }
+
         if (markup?.id) {
             updateMarkUpItem({
                 id: markup.id,
@@ -57,6 +70,7 @@ export const MarkupDialog = (
             setSelectedCostCode(markup?.costCode || '');
             setPercent(markup?.percent || '');
             setSelectedIds(markup?.appliedIds || []);
+            setIsSubmitted(false);
         }
     }, [markup, open]);
 
@@ -66,6 +80,10 @@ export const MarkupDialog = (
             onClose={handleClose}
             fullWidth
             slotProps={{
+                paper: {
+                    component: 'form',
+                    onSubmit: handleSave,
+                },
                 transition: {
                     onExited: () => {
                         setSelectedCostCode('');
@@ -78,11 +96,11 @@ export const MarkupDialog = (
             <DialogTitle sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                paddingBlock: '24px'
+                alignItems: 'end',
+                paddingBlock: '24px',
+                fontWeight: 600
             }}>
-                <Typography sx={{ fontWeight: 600, paddingBlock: '9px' }} variant='h5'>
-                    Add Markup
-                </Typography>
+                {markup?.id ? 'Edit Markup' : 'Add Markup'}
                 <IconButton onClick={handleClose}>
                     <CloseIcon />
                 </IconButton>
@@ -90,12 +108,18 @@ export const MarkupDialog = (
             <DialogContent sx={{ overflowX: 'hidden' }}>
                 <Box display='flex'>
                     <Box sx={{ marginRight: '16px', width: '80%' }}>
-                        <InputLabel id='cost-code-select'>Cost code</InputLabel>
+                        <InputLabel
+                            id='cost-code-select'
+                            error={isCostCodeInvalid}
+                        >
+                            Cost code
+                        </InputLabel>
                         <Select
                             size='small'
                             fullWidth
                             labelId='cost-code-select'
                             value={selectedCostCode}
+                            error={isCostCodeInvalid}
                             onChange={(e) => setSelectedCostCode(e.target.value)}
                         >
                             {
@@ -108,23 +132,44 @@ export const MarkupDialog = (
                                     )
                             }
                         </Select>
+                        {isCostCodeInvalid && <Typography variant="caption" color="error">Required</Typography>}
                     </Box>
                     <Box>
-                        <InputLabel id='perecent'>Percent</InputLabel>
+                        <InputLabel
+                            id='perecent'
+                            error={isPercentInvalid}
+                        >
+                            Percent
+                        </InputLabel>
                         <TextField
                             type="number"
                             value={percent}
                             placeholder="0"
                             size='small'
+                            error={isPercentInvalid}
+                            helperText={isPercentInvalid ? "Must be > 0" : ""}
                             onChange={(e) => setPercent(Number(e.target.value))}
                         />
                     </Box>
                 </Box>
-                <MarkupTable
-                    selectedIds={selectedIds}
-                    setSelectedIds={setSelectedIds}
-                    percent={Number(percent)}
-                />
+                <Box sx={{
+                    border: isTableInvalid ? '1px solid' : 'none',
+                    borderColor: 'error.main',
+                    borderRadius: 1,
+                    mt: isTableInvalid ? 1 : 0,
+                    p: isTableInvalid ? 1 : 0
+                }}>
+                    <MarkupTable
+                        selectedIds={selectedIds}
+                        setSelectedIds={setSelectedIds}
+                        percent={Number(percent)}
+                    />
+                    {isTableInvalid && (
+                        <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                            Select at least one budget item to apply markup
+                        </Typography>
+                    )}
+                </Box>
             </DialogContent>
             <DialogActions disableSpacing sx={{ px: 3, pb: 2, pt: '48px', gap: 2, justifyContent: 'space-between' }}>
                 <Button

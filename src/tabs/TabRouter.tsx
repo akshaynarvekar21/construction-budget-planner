@@ -1,9 +1,7 @@
 import { Container } from "@mui/material";
-import { Budget } from "./budget/Budget";
-import { Cost } from "./cost/Cost";
-import { CostCodeProvider } from "../context/CostCodeContext/CostCodeContext";
-import { BudgetProvider } from "../context/BudgetContext/BudgetContext";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { Budget, Cost } from "../tabs";
+import { BudgetProvider, CostCodeProvider } from "../context";
 
 export const TabRouter = () => {
 

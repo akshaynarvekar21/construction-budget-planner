@@ -1,7 +1,7 @@
+import { type ReactNode } from 'react';
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { BudgetProvider, useBudget, type Markup } from './BudgetContext';
-import { type ReactNode } from 'react';
 
 const wrapper = ({ children }: { children: ReactNode }) => (
     <BudgetProvider>{children}</BudgetProvider>

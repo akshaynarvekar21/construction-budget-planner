@@ -10,7 +10,7 @@ import {
     TextField
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
+import { useCostCode } from "../../context";
 
 const CostCodeTableRow = ({ costCode = '', index }: { costCode?: string; index: number }) => {
     const [text, setText] = useState<string>(costCode);
@@ -22,7 +22,9 @@ const CostCodeTableRow = ({ costCode = '', index }: { costCode?: string; index: 
                     variant="outlined"
                     placeholder="Enter cost code"
                     size="small"
-                    fullWidth
+                    sx={{
+                        width: '70%'
+                    }}
                     value={text}
                     onChange={(evt) => {
                         setText(evt.target.value);

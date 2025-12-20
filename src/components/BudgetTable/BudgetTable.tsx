@@ -9,11 +9,11 @@ import {
     TextField,
     IconButton,
     Autocomplete,
-    TableFooter
+    TableFooter,
+    Tooltip
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
-import { useBudget, type Budget } from "../../context/BudgetContext/BudgetContext";
+import { useBudget, type Budget, useCostCode } from "../../context";
 
 const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
     const [num, setNum] = useState(budgetLine?.amount || '');
@@ -34,6 +34,9 @@ const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
                             ...budgetLine,
                             costCode: newVal || ''
                         })
+                        if (!newVal) {
+                            setNum('');
+                        }
                     }}
                     renderInput={(params) =>
                         <TextField
@@ -47,20 +50,25 @@ const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
                 />
             </TableCell>
             <TableCell>
-                <TextField
-                    variant="outlined"
-                    placeholder="0.00"
-                    size="small"
-                    fullWidth
-                    value={num}
-                    type="number"
-                    sx={{ input: { textAlign: 'right' } }}
-                    onChange={(evt) => setNum(Number(evt.target.value))}
-                    onBlur={(evt) => updateBudgetItem({
-                        ...budgetLine,
-                        amount: Number(evt.target.value)
-                    })}
-                />
+                <Tooltip title={val === '' ? 'Select cost code first' : ''}>
+                    <span>
+                        <TextField
+                            variant="outlined"
+                            placeholder="0.00"
+                            size="small"
+                            fullWidth
+                            value={num}
+                            type="number"
+                            disabled={val === ''}
+                            sx={{ input: { textAlign: 'right' } }}
+                            onChange={(evt) => setNum(Number(evt.target.value))}
+                            onBlur={(evt) => updateBudgetItem({
+                                ...budgetLine,
+                                amount: Number(evt.target.value)
+                            })}
+                        />
+                    </span>
+                </Tooltip>
             </TableCell>
             <TableCell align="right">
                 <IconButton

@@ -1,5 +1,5 @@
 import { AppBar, Container, Divider, Toolbar, Typography } from '@mui/material';
-import { AppTabs } from '../Tabs/Tabs';
+import { AppTabs } from '../Tabs';
 
 export const Header = () => {
 
