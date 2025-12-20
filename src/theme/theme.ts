@@ -15,6 +15,9 @@ export const customTheme = createTheme({
         grey: {
             50: '#F9FAFB',
         },
+        error: {
+            main: '#D32F2F',
+        },
         divider: '#D3D9DE'
     },
     typography: {
