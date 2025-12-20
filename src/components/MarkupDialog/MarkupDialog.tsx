@@ -13,10 +13,10 @@ import {
     Typography,
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { useCostCode } from "../../context/CostCodeContext";
+import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
 import { MarkupTable } from "../MarkupTable/MarkupTable";
 import { useEffect, useState } from "react";
-import { useBudget, type Markup } from "../../context/BudgetContext";
+import { useBudget, type Markup } from "../../context/BudgetContext/BudgetContext";
 
 export const MarkupDialog = (
     {

@@ -12,8 +12,8 @@ import {
     TableFooter
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useCostCode } from "../../context/CostCodeContext";
-import { useBudget, type Budget } from "../../context/BudgetContext";
+import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
+import { useBudget, type Budget } from "../../context/BudgetContext/BudgetContext";
 
 const BudgetTableRow = ({ budgetLine }: { budgetLine: Budget }) => {
     const [num, setNum] = useState(budgetLine?.amount || '');

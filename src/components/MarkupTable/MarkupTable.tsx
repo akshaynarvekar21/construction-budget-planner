@@ -9,7 +9,7 @@ import {
     TableHead,
     TableRow
 } from "@mui/material";
-import { useBudget, type Budget } from "../../context/BudgetContext";
+import { useBudget, type Budget } from "../../context/BudgetContext/BudgetContext";
 
 const MarkupTableRow = ({ budget, checked, onToggle }: {
     budget: Budget;

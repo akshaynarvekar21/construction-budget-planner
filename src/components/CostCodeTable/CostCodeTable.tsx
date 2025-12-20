@@ -10,7 +10,7 @@ import {
     TextField
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useCostCode } from "../../context/CostCodeContext";
+import { useCostCode } from "../../context/CostCodeContext/CostCodeContext";
 
 const CostCodeTableRow = ({ costCode = '', index }: { costCode?: string; index: number }) => {
     const [text, setText] = useState<string>(costCode);

@@ -1,5 +1,5 @@
 import { Table, TableCell, TableContainer, TableFooter, TableRow } from "@mui/material";
-import { useBudget } from "../../context/BudgetContext";
+import { useBudget } from "../../context/BudgetContext/BudgetContext";
 
 
 export const GrandTotalDisplay = () => {
