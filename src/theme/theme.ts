@@ -1,24 +1,54 @@
 import { createTheme } from '@mui/material/styles';
 
 export const customTheme = createTheme({
-    palette: {
-        primary: {
-            main: '#00CC77',
-            contrastText: '#FFFFFF',
+    cssVariables: {
+        colorSchemeSelector: 'class',
+    },
+    colorSchemes: {
+        light: {
+            palette: {
+                primary: {
+                    main: '#00CC77',
+                    contrastText: '#FFFFFF',
+                },
+                text: {
+                    primary: '#2E3332',
+                },
+                background: {
+                    default: '#FFFFFF',
+                },
+                grey: {
+                    50: '#F9FAFB',
+                },
+                error: {
+                    main: '#D32F2F',
+                },
+                divider: '#D3D9DE'
+            },
         },
-        text: {
-            primary: '#2E3332',
+        dark: {
+            palette: {
+                primary: {
+                    main: '#00CC77',
+                    contrastText: '#0B1F16',
+                },
+                text: {
+                    primary: '#E6EBE9',
+                    secondary: '#A3ADAA',
+                },
+                background: {
+                    default: '#121615',
+                    paper: '#1A1F1E',
+                },
+                grey: {
+                    50: '#1F2625',
+                },
+                error: {
+                    main: '#F2726D',
+                },
+                divider: '#3A4442'
+            },
         },
-        background: {
-            default: '#FFFFFF',
-        },
-        grey: {
-            50: '#F9FAFB',
-        },
-        error: {
-            main: '#D32F2F',
-        },
-        divider: '#D3D9DE'
     },
     typography: {
         fontFamily: [
@@ -41,22 +71,22 @@ export const customTheme = createTheme({
                     borderRadius: '4px',
                 },
                 containedPrimary: ({ theme }) => ({
-                    backgroundColor: theme.palette.primary.main,
-                    color: theme.palette.primary.contrastText,
+                    backgroundColor: theme.vars.palette.primary.main,
+                    color: theme.vars.palette.primary.contrastText,
                     border: '1px solid transparent',
                     '&:hover': {
-                        backgroundColor: theme.palette.background.default,
-                        color: theme.palette.primary.main,
-                        border: `1px solid ${theme.palette.primary.main}`,
+                        backgroundColor: theme.vars.palette.background.default,
+                        color: theme.vars.palette.primary.main,
+                        border: `1px solid ${theme.vars.palette.primary.main}`,
                     },
                 }),
                 outlinedPrimary: ({ theme }) => ({
-                    borderColor: theme.palette.primary.main,
-                    color: theme.palette.primary.main,
+                    borderColor: theme.vars.palette.primary.main,
+                    color: theme.vars.palette.primary.main,
                     '&:hover': {
-                        backgroundColor: theme.palette.primary.main,
-                        color: theme.palette.primary.contrastText,
-                        borderColor: theme.palette.primary.main,
+                        backgroundColor: theme.vars.palette.primary.main,
+                        color: theme.vars.palette.primary.contrastText,
+                        borderColor: theme.vars.palette.primary.main,
                     },
                 }),
             },
@@ -71,8 +101,8 @@ export const customTheme = createTheme({
         MuiTableCell: {
             styleOverrides: {
                 root: ({ theme }) => ({
-                    borderBottom: `1px solid ${theme.palette.divider}`,
-                    borderRight: `1px solid ${theme.palette.divider}`,
+                    borderBottom: `1px solid ${theme.vars.palette.divider}`,
+                    borderRight: `1px solid ${theme.vars.palette.divider}`,
                     '&:last-child': {
                         borderRight: 'none',
                     },
@@ -80,11 +110,11 @@ export const customTheme = createTheme({
                     paddingBottom: '9px',
                 }),
                 head: ({ theme }) => ({
-                    backgroundColor: theme.palette.grey[50],
+                    backgroundColor: theme.vars.palette.grey[50],
                     fontWeight: 600,
                 }),
                 footer: ({ theme }) => ({
-                    backgroundColor: theme.palette.grey[50],
+                    backgroundColor: theme.vars.palette.grey[50],
                     fontWeight: 600,
                     borderBottom: 'none',
                 })
@@ -93,7 +123,7 @@ export const customTheme = createTheme({
         MuiTableContainer: {
             styleOverrides: {
                 root: ({ theme }) => ({
-                    border: `1px solid ${theme.palette.divider}`,
+                    border: `1px solid ${theme.vars.palette.divider}`,
                     borderRadius: 4,
                     marginTop: '24px',
                 }),
