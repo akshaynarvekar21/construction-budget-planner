@@ -31,7 +31,7 @@ describe('Budget Component', () => {
         vi.mocked(useBudget).mockReturnValue({
             addBudgetItem: mockAddBudgetItem,
             markups: [],
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
 
         render(<Budget />);
 
@@ -44,7 +44,7 @@ describe('Budget Component', () => {
         vi.mocked(useBudget).mockReturnValue({
             addBudgetItem: mockAddBudgetItem,
             markups: [],
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
 
         render(<Budget />);
 
@@ -58,7 +58,7 @@ describe('Budget Component', () => {
         vi.mocked(useBudget).mockReturnValue({
             addBudgetItem: mockAddBudgetItem,
             markups: [],
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
 
         render(<Budget />);
 
@@ -74,7 +74,7 @@ describe('Budget Component', () => {
         vi.mocked(useBudget).mockReturnValue({
             addBudgetItem: mockAddBudgetItem,
             markups: [{ id: '1', name: 'Tax', amount: 10 }],
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
 
         render(<Budget />);
 
@@ -86,7 +86,7 @@ describe('Budget Component', () => {
         vi.mocked(useBudget).mockReturnValue({
             addBudgetItem: mockAddBudgetItem,
             markups: [],
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
 
         render(<Budget />);
 

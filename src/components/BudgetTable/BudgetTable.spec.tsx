@@ -23,7 +23,7 @@ describe('BudgetTable', () => {
 
         vi.mocked(useCostCode).mockReturnValue({
             costCodes: mockCostCodes,
-        } as any);
+        } as unknown as ReturnType<typeof useCostCode>);
 
         vi.mocked(useBudget).mockReturnValue({
             budgetList: mockBudgetList,
@@ -31,7 +31,7 @@ describe('BudgetTable', () => {
             updateBudgetItem: mockUpdateBudgetItem,
             deleteBudgetItem: mockDeleteBudgetItem,
             baseTotal: 1000,
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
     });
 
     it('renders the table with initial budget items and total', () => {
@@ -47,7 +47,7 @@ describe('BudgetTable', () => {
             budgetList: [],
             addBudgetItem: mockAddBudgetItem,
             baseTotal: 0,
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
 
         render(<BudgetTable />);
         expect(mockAddBudgetItem).toHaveBeenCalledTimes(1);
@@ -74,7 +74,7 @@ describe('BudgetTable', () => {
             budgetList: emptyBudget,
             addBudgetItem: mockAddBudgetItem,
             baseTotal: 0,
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
 
         render(<BudgetTable />);
 

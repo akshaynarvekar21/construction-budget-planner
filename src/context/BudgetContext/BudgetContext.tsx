@@ -114,6 +114,7 @@ export const BudgetProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components -- hook is colocated with its provider
 export const useBudget = (): BudgetContextType => {
     const context = useContext(BudgetContext);
 

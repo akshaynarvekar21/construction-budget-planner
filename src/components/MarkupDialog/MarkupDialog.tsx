@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
     Box,
     Button,
@@ -30,11 +30,25 @@ export const MarkupDialog = (
     const { costCodes } = useCostCode();
     const { addMarkup, updateMarkUpItem } = useBudget();
 
-    const [selectedCostCode, setSelectedCostCode] = useState('');
-    const [percent, setPercent] = useState<number | string>('');
-    const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const [selectedCostCode, setSelectedCostCode] = useState(markup?.costCode || '');
+    const [percent, setPercent] = useState<number | string>(markup?.percent || '');
+    const [selectedIds, setSelectedIds] = useState<string[]>(markup?.appliedIds || []);
 
     const [isSubmitted, setIsSubmitted] = useState(false);
+
+    // Reset the form whenever the dialog opens or the edited markup changes.
+    const [prevOpen, setPrevOpen] = useState(open);
+    const [prevMarkup, setPrevMarkup] = useState(markup);
+    if (open !== prevOpen || markup !== prevMarkup) {
+        setPrevOpen(open);
+        setPrevMarkup(markup);
+        if (open) {
+            setSelectedCostCode(markup?.costCode || '');
+            setPercent(markup?.percent || '');
+            setSelectedIds(markup?.appliedIds || []);
+            setIsSubmitted(false);
+        }
+    }
 
     const isCostCodeInvalid = isSubmitted && !selectedCostCode;
     const isPercentInvalid = isSubmitted && (percent === '' || Number(percent) <= 0);
@@ -64,15 +78,6 @@ export const MarkupDialog = (
         }
         handleClose();
     };
-
-    useEffect(() => {
-        if (open) {
-            setSelectedCostCode(markup?.costCode || '');
-            setPercent(markup?.percent || '');
-            setSelectedIds(markup?.appliedIds || []);
-            setIsSubmitted(false);
-        }
-    }, [markup, open]);
 
     return (
         <Dialog

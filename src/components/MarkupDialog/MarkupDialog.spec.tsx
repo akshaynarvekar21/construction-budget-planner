@@ -20,13 +20,13 @@ describe('MarkupDialog', () => {
 
         vi.mocked(useCostCode).mockReturnValue({
             costCodes: mockCostCodes,
-        } as any);
+        } as unknown as ReturnType<typeof useCostCode>);
 
         vi.mocked(useBudget).mockReturnValue({
             addMarkup: mockAddMarkup,
             updateMarkUpItem: mockUpdateMarkUpItem,
             budgetList: [{ id: 'b1', costCode: '10-100', amount: 1000 }],
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
     });
 
     it('renders "Add Markup" title when no markup is provided', () => {
