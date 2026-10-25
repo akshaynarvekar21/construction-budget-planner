@@ -1,0 +1,62 @@
+name: Security agent
+
+# Runs Claude on the open security findings and opens (or updates) one PR.
+# Playbook: .claude/skills/security-fix/SKILL.md. The agent never merges.
+# Setup: install the Claude GitHub App and add the ANTHROPIC_API_KEY secret.
+
+on:
+  workflow_run:
+    workflows: ['DAST (scheduled)']
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-agent
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    name: fix
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: read
+      actions: read
+      security-events: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+
+      # Collected here with the workflow token so the agent only gets read access to the results
+      - name: Collect findings
+        run: node scripts/security/collect-findings.mjs findings.json
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - uses: anthropics/claude-code-action@925afb53776cf1a2b738c6bdbed37b4d4000ef13 # v1.0.262
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Repository: ${{ github.repository }}. You are running in CI mode.
+            Follow .claude/skills/security-fix/SKILL.md exactly. findings.json in the
+            working directory has already been collected. Open or update at most one PR
+            and never merge it.
+          claude_args: >-
+            --model claude-opus-5-5
+            --max-turns 80
+            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(npm ci),Bash(npm run lint),Bash(npm run build),Bash(npm test:*),Bash(npx tsc:*),Bash(npx -y npm@11 install:*),Bash(git:*),Bash(gh pr list:*),Bash(gh pr view:*),Bash(gh pr create:*),Bash(gh pr edit:*),Bash(date:*)"

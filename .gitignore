@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Claude Code: share skills, keep local settings local
+.claude/*
+!.claude/skills/
+
+# Security agent scratch output
+findings.json

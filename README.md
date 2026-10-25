@@ -77,3 +77,10 @@ Where to find the results:
 - **Issues → "ZAP DAST findings"**: ZAP results. The full HTML report is attached to each workflow run as the `zap-report` artifact.
 
 Known false positives in ZAP can be suppressed in `.zap/rules.tsv`.
+
+### Security agent
+
+A Claude agent can work through the open findings for you. It fixes what can be fixed in code, records unfixable ZAP alerts in `.zap/rules.tsv` with a reason, and lists anything that needs a human (repo settings, license choice) in the PR. It only ever opens or updates **one pull request**: it never merges, dismisses alerts or changes repo settings. Both modes follow the same playbook, `.claude/skills/security-fix/SKILL.md`.
+
+- **Locally:** run `/security-fix` in Claude Code. To just see the findings, run `node scripts/security/collect-findings.mjs` (writes `findings.json`).
+- **In CI:** `.github/workflows/security-agent.yml` runs after the weekly DAST scan, or on demand from the Actions tab. One-time setup: install the Claude GitHub App (`/install-github-app` in Claude Code), which also lets the agent's PRs trigger CI, and add an `ANTHROPIC_API_KEY` repository secret.
