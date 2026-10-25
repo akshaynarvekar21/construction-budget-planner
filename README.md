@@ -1,5 +1,9 @@
 # Construction Budget Planner
 
+[![CI/CD](https://github.com/akshaynarvekar21/construction-budget-planner/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/akshaynarvekar21/construction-budget-planner/actions/workflows/ci-cd.yml)
+[![CodeQL](https://github.com/akshaynarvekar21/construction-budget-planner/actions/workflows/codeql.yml/badge.svg)](https://github.com/akshaynarvekar21/construction-budget-planner/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/akshaynarvekar21/construction-budget-planner/badge)](https://scorecard.dev/viewer/?uri=github.com/akshaynarvekar21/construction-budget-planner)
+
 This application helps you manage your construction project.
 
 Live demo: https://akshaynarvekar21.github.io/construction-budget-planner
@@ -50,3 +54,26 @@ Markup Dialog:
 Markup Dialog Validations:
 
 ![Markup Dialog Validations](<Screenshot 2025-12-20 at 2.38.19 PM.png>)
+
+## CI/CD and security scanning
+
+Every pull request and push to `main` runs the GitHub Actions pipeline in `.github/workflows/`:
+
+| Check | Tool | Fails the build on |
+|---|---|---|
+| Lint, tests, build | ESLint, Vitest, `tsc` + Vite | any error |
+| SAST | CodeQL (`security-extended`), Semgrep | high+ alerts (via branch ruleset) |
+| SCA | Trivy, `npm audit`, Dependency Review, Dependabot | high/critical vulnerabilities |
+| Secrets | Gitleaks, GitHub secret scanning | any leaked secret |
+| DAST | OWASP ZAP baseline (live site, after deploy + weekly) | report only |
+| Supply chain | OpenSSF Scorecard | report only |
+
+Pushes to `main` that pass every check deploy to GitHub Pages automatically.
+
+Where to find the results:
+- **Security → Code scanning**: CodeQL, Semgrep, Trivy and Scorecard alerts (filter by tool).
+- **Security → Dependabot / Secret scanning**: vulnerable dependencies and leaked secrets.
+- **Pull request checks**: alerts a PR introduces, plus the dependency-review summary.
+- **Issues → "ZAP DAST findings"**: ZAP results. The full HTML report is attached to each workflow run as the `zap-report` artifact.
+
+Known false positives in ZAP can be suppressed in `.zap/rules.tsv`.

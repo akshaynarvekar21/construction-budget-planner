@@ -18,7 +18,7 @@ describe('MarkupTable', () => {
         vi.clearAllMocks();
         vi.mocked(useBudget).mockReturnValue({
             budgetList: mockBudgetList,
-        } as any);
+        } as unknown as ReturnType<typeof useBudget>);
     });
 
     it('renders the list of budget items with amounts', () => {

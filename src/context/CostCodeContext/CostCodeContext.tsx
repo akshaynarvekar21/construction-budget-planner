@@ -38,6 +38,7 @@ export const CostCodeProvider = ({ children }: { children: ReactNode }) => {
 
 };
 
+// eslint-disable-next-line react-refresh/only-export-components -- hook is colocated with its provider
 export const useCostCode = (): CostCodeContextType => {
     const context = useContext(CostCodeContext);
 

@@ -1,0 +1,4 @@
+# ZAP baseline rule overrides: <rule id>	<IGNORE|WARN|FAIL>	(<comment>)
+# Fields are TAB-separated. Rule IDs: https://www.zaproxy.org/docs/alerts/
+# Example (GitHub Pages does not let you set response headers):
+# 10038	IGNORE	(Content Security Policy header not set - not configurable on GitHub Pages)
